@@ -278,6 +278,8 @@ export class Weapon extends BaseEntity<CWeaponCSBase> {
    */
   get prevOwner(): Player | null {
     const handle = this.getProp("DT_WeaponCSBase", "m_hPrevOwner");
-    return this._demo.entities.getByHandle(handle) as Player | null;
+    return (this._demo.entities.getByHandle(
+      handle
+    ) as unknown) as Player | null;
   }
 }

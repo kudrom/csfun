@@ -2,7 +2,7 @@ import { CTeam } from "../sendtabletypes";
 import { Networkable } from "./networkable";
 import { Player } from "./player";
 
-export type TeamName = "SPECTATOR" | "TERRORIST" | "COUNTERTERRORIST";
+export type TeamName = "SPECTATOR" | "TERRORIST" | "CT";
 
 export const enum TeamNumber {
   Unassigned = 0,

@@ -211,9 +211,9 @@ export class Player extends BaseEntity<CCSPlayer> {
    * @returns Currently held weapon
    */
   get weapon(): Weapon | null {
-    return this._demo.entities.getByHandle(
+    return (this._demo.entities.getByHandle(
       this.getProp("DT_BaseCombatCharacter", "m_hActiveWeapon")
-    ) as Weapon | null;
+    ) as unknown) as Weapon | null;
   }
 
   /**

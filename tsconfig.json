@@ -16,7 +16,8 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "strictNullChecks": false
   },
   "compileOnSave": true,
   "include": ["./src/**/*.ts", "./src/protobufs/*.js"]
