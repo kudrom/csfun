@@ -1,7 +1,7 @@
 import fs = require("fs");
 import assert = require("assert");
 import demofile = require("../demo");
-import { Client, ApiResponse, RequestParams } from "@elastic/elasticsearch";
+import { Client, RequestParams } from "@elastic/elasticsearch";
 import { Team } from "../entities/team";
 
 const client = new Client({ node: "http://localhost:9200" });
@@ -13,9 +13,9 @@ let event_name: string;
 let accounts_start: Array<number> = [];
 
 function parseDemoFile(path: string) {
-  event_name = path.split("/")[path.split("/").length - 1].split("#")[0];
+  event_name = path.split("/")[path.split("/").length - 2];
   start_match = new Date(
-    parseInt(path.split("/")[path.split("/").length - 1].split("#")[1]) * 1000
+    parseInt(path.split("/")[path.split("/").length - 1].split("#")[0])
   );
   fs.readFile(path, (err, buffer) => {
     assert.ifError(err);
@@ -72,4 +72,11 @@ function parseDemoFile(path: string) {
   });
 }
 
-parseDemoFile(process.argv[2]);
+fs.readdir(process.argv[2], (err, files) => {
+  for (let demo_file of files.filter(f => {
+    return f.endsWith(".dem");
+  })) {
+    console.log("Indexing", demo_file);
+    parseDemoFile(process.argv[2] + demo_file);
+  }
+});

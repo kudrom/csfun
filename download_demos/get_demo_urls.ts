@@ -20,7 +20,7 @@ function download_event(event_id: number) {
               team1: match.team1.name,
               team2: match.team2.name,
               date: match.date,
-              demo_url: "https://www.hltv.com" + demo[0]
+              url: "https://www.hltv.org" + demo[0]
             })
           );
         }

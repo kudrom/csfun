@@ -4,7 +4,7 @@ const fs = require("fs");
 const assert = require("assert");
 const demofile = require("../demo");
 const elasticsearch_1 = require("@elastic/elasticsearch");
-const client = new elasticsearch_1.Client({ node: 'http://localhost:9200' });
+const client = new elasticsearch_1.Client({ node: "http://localhost:9200" });
 let round = 1;
 let map;
 let winner;
@@ -12,8 +12,8 @@ let start_match;
 let event_name;
 let accounts_start = [];
 function parseDemoFile(path) {
-    event_name = path.split('/')[path.split('/').length - 1].split('#')[0];
-    start_match = new Date(parseInt(path.split('/')[path.split('/').length - 1].split('#')[1]) * 1000);
+    event_name = path.split("/")[path.split("/").length - 2];
+    start_match = new Date(parseInt(path.split("/")[path.split("/").length - 1].split("#")[0]));
     fs.readFile(path, (err, buffer) => {
         assert.ifError(err);
         const demoFile = new demofile.DemoFile();
@@ -22,7 +22,7 @@ function parseDemoFile(path) {
                 if (team.teamName === "CT" || team.teamName === "TERRORIST") {
                     for (let player of team.members) {
                         const doc = {
-                            index: 'csfun-v1',
+                            index: "csfun-v1",
                             body: {
                                 event: event_name,
                                 start_match: start_match,
@@ -54,7 +54,7 @@ function parseDemoFile(path) {
             }
         });
         demoFile.gameEvents.on("round_end", e => {
-            console.log('Round %d', round);
+            console.log("Round %d", round);
             winner = demoFile.teams[e.winner];
             index_budget();
             round += 1;
@@ -62,5 +62,10 @@ function parseDemoFile(path) {
         demoFile.parse(buffer);
     });
 }
-parseDemoFile(process.argv[2]);
+fs.readdir(process.argv[2], (err, files) => {
+    for (let demo_file of files.filter((f) => { return f.endsWith('.dem'); })) {
+        console.log("Indexing", demo_file);
+        parseDemoFile(process.argv[2] + demo_file);
+    }
+});
 //# sourceMappingURL=economy.js.map
