@@ -20,5 +20,5 @@
     "strictNullChecks": false
   },
   "compileOnSave": true,
-  "include": ["./src/**/*.ts", "./src/protobufs/*.js"]
+  "include": ["./src/**/*.ts", "./src/protobufs/*.js", "manage_demos/*.ts"]
 }

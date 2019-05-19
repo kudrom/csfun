@@ -24,8 +24,11 @@
   },
   "main": "dist/demo.js",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.0.1",
+    "@types/elasticsearch": "^5.0.32",
     "bit-buffer": "0.0.3",
     "bytebuffer": "^5.0.0",
+    "hltv": "gigobyte/HLTV#master",
     "lodash": "^4.17.11",
     "long": "^3.0.3",
     "protobufjs": "^6.8.8"
@@ -46,7 +49,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-language-service-ts3": "^1.0.0",
-    "typedoc": "^0.13.0",
+    "typedoc": "^0.14.2",
     "typescript": "^3.1.1",
     "typestrict": "^1.0.1"
   },
